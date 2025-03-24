@@ -1,0 +1,188 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skill-Ed - Teacher Login</title>
+    <!-- bootstrap cdn -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <!-- font awesome icons -->
+    <script src="https://kit.fontawesome.com/187a4ab8ee.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url("{% static 'images/bg-image.jpg' %}");
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #1f70b8;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer .company-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        footer .description {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        footer .copyright {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .login-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+        }
+
+        .login-form {
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 30px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .login-form h3 {
+            font-size: 24px;
+            font-weight: bold;
+            color: #1f70b8;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .login-form input {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            font-size: 16px;
+        }
+
+        .login-form button {
+            background-color: #1f70b8;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .login-form button:hover {
+            background-color: #165a91;
+        }
+
+        .highlighted {
+            color: #1f70b8;
+            text-decoration: none;
+        }
+
+        .highlighted:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    {% if alert_message %}
+<script>
+    alert("{{ alert_message }}");
+</script>
+{% endif %}
+    <!-- Header -->
+    <header class="container">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <img src="{% static 'images/logo.jpg' %}" alt="Skill-Ed Logo" style="width: 150px;height: 50px;">
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="margin-left: 800px;">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto" >
+                        <li class="nav-item">
+                            <a class="nav-link" aria-current="page" href="/">Home</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="#address">About</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link active" href="/loginindex">Login</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Login Section -->
+    <main class="container login-container">
+        <form action="" method="POST" enctype="multipart/form-data" class="login-form">
+            {% csrf_token %}
+            <h3>Student Register</h3>
+            <input type="text" name="studentusername" placeholder="Enter your username" required>
+            <input type="email" name="studentemail" placeholder="Enter your email" required>
+            <input type="tel" name="studentphone" placeholder="Enter your phone number" required>
+            <input type="password" name="studentpassword" placeholder="Enter your password" required>
+            <input type="password" name="studentcpassword" placeholder="Enter confirm password" required>
+            <button type="submit">Register</button>
+            <p class="text-center mt-3">
+                <a href="/studentlogin" class="highlighted">Already have an account? Login</a>
+            </p>
+        </form>
+    </main>
+
+    <!-- Footer -->
+    <footer id="address">
+        <div class="company-name">Skill-Ed</div>
+        <div class="description">
+            Skill-Ed is an innovative e-learning platform designed to empower learners with high-quality, engaging, and
+            accessible educational resources.
+        </div>
+        <div class="address">Carnival Phase 1 Infopark, Kochi, India</div>
+        <div>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://www.facebook.com/"><i
+                    class="fa-brands fa-facebook"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://www.instagram.com/"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://twitter.com/?lang=en"><i
+                    class="fa-brands fa-twitter"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://www.whatsapp.com/"><i
+                    class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div class="copyright">&copy; 2025 Skill-Ed. All rights reserved.</div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

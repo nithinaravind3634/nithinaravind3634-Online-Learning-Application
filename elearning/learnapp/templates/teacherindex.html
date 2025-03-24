@@ -1,0 +1,513 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skill-Ed - Teacher Login</title>
+    <!-- Bootstrap CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/187a4ab8ee.js" crossorigin="anonymous"></script>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background-image: url("{% static 'images/bg-image.jpg' %}");
+        }
+
+        main {
+            flex: 1;
+        }
+
+        footer {
+            background-color: #1f70b8;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+
+        footer .company-name {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        footer .description {
+            font-size: 1rem;
+            margin: 5px 0;
+        }
+
+        footer .copyright {
+            font-size: 0.9rem;
+            margin-top: 10px;
+        }
+
+        .background-div {
+            height: 700px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .background-div video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -1;
+        }
+
+        .image-container {
+            position: relative;
+            width: 200px;
+            height: 210px;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .image-container img {
+            width: 100%;
+            height: 90%;
+            object-fit: cover;
+            transition: transform 0.3s ease, opacity 0.3s ease;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.05);
+        }
+
+        .image-container img.default {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .image-container img.hovered {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            opacity: 0;
+        }
+
+        .image-container:hover img.hovered {
+            opacity: 1;
+        }
+
+        .image-container:hover img.default {
+            opacity: 0;
+        }
+
+        /* Hover effect for h5 */
+        .image-container h5 {
+            transition: color 0.3s ease;
+        }
+
+        .image-container:hover h5 {
+            color: #1f70b8;
+        }
+        .offcanvas-body {
+            background-color: rgba(255, 255, 255, 0.5);
+            color: black;
+            padding: 20px;
+        }
+
+        .offcanvas-header {
+            background-color: #1f70b8;
+        }
+
+        .offcanvas-body h1 {
+            color: black;
+            font-family: 'Times New Roman', serif;
+            font-size: 1.5rem;
+            margin: 10px 0;
+        }
+        .btn-close.custom-white {
+    filter: invert(1);
+  }
+
+
+
+
+
+
+
+/*........................................... 
+                 partners section
+    ...........................................*/
+.sponsor-img {
+    width: 8%;
+}
+
+/*............................................ 
+              media queries
+ ............................................*/
+
+@media screen and (max-width:600px) {
+    h1 {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 10px;
+    }
+  
+}
+.collapse{
+    margin-left: 800px;
+}
+
+  .btn-custom ,.text-bg-custom{
+    background-color: #1f70b8;
+    color: white; /* Adjust text color for better contrast */
+    border: none; /* Optional: remove border */
+  }
+  .text-custom {
+    color: #1f70b8 ;
+  }
+
+  .btn-custom:hover {
+    background-color: #165a91; /* Optional: darker shade for hover effect */
+  }
+
+
+ 
+
+    footer .address .description{
+      font-size: 1rem;
+      margin: 5px 0;
+    }
+
+ 
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="container">
+        <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <img src="{% static 'images/logo.jpg' %}" alt="Skill-Ed Logo" style="width: 150px;height: 50px;">
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="margin-left: 800px;">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link" role="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">Profile</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'myuploads' teacherusername %}" target="_blank">My Uploads</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#address">About</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+
+                        
+             
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Background Section -->
+    <div class="background-div">
+        <video autoplay muted loop>
+            <source src="{% static 'videos/bg-video.mp4' %}" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+
+    <a href="{% url 'postvideo' teacherusername %}" target="_blank" style="text-decoration: none;color: black;">
+        <div class="image-container" style="width: 250px;">
+            <img src="{% static 'images/upblack.png' %}" alt="Default Image 1" class="default">
+            <img src="{% static 'images/upblue.png' %}" alt="Hovered Image 1" class="hovered">
+            <div class="title mt-3 text-center">
+                <h5 style="margin-top: 180px;" class="up">Video Upload</h5>
+            </div>
+        </div>
+    </a>
+
+    <a href="{% url 'postfile' teacherusername %}" target="_blank" style="text-decoration: none;color: black;">
+        <div class="image-container">
+            <img src="{% static 'images/fileblack.png' %}" alt="Default Image 2" class="default">
+            <img src="{% static 'images/fileblue.png' %}" alt="Hovered Image 2" class="hovered">
+            <div class="title mt-3 text-center">
+                <h5 style="margin-top: 185px;margin-left: 20px;" class="up">Notes Upload</h5>
+            </div>
+        </div>
+    </a>
+
+    <a href="{% url 'viewresponse' teacherusername %}" target="_blank" style="text-decoration: none;color: black;">
+        <div class="image-container">
+            <img src="{% static 'images/cblack.png' %}" alt="Default Image 3" class="default">
+            <img src="{% static 'images/cblue.png' %}" alt="Hovered Image 3" class="hovered">
+            <div class="title mt-3 text-center">
+                <h5 style="margin-top: 185px;" class="up">View Responses</h5>
+            </div>
+        </div>
+    </a>
+    </div>
+
+
+
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasRight" aria-labelledby="offcanvasRightLabel">
+        <div class="offcanvas-header">
+          <h5 id="offcanvasRightLabel" style="color: white;">Teacher Details</h5>
+          <button type="button" class="btn-close btn-close-white text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+        </div>
+      
+      
+      
+        <div class="offcanvas-body">
+           <center> <img src="{% static 'images/teacherprofile.jpg'%}" alt="" style="height: 150px;width: 150px;"></center>
+           <h1>Name: {{teacherusername}}</h1>
+           <h1>Email: {{teacheremail}}</h1>
+           <h1>Phone: {{teacherphone}}</h1>
+
+     
+       </div>
+   </div>
+
+    <!--.............................................................. 
+                              courses section
+         ...............................................................-->
+         <section class="text-center mt-5">
+           <h3 class="fw-bold">
+               Discover Our Popular <br> Courses
+           </h3>
+           <p>
+               Start, switch, or advance your career with more than 5,000 courses, <br> Professional Certificates, and
+               degrees from world-class universities and companies.
+           </p>
+       </section>
+       <section class="container">
+           <!--.................................................................. 
+                                         courses list
+             ...................................................................-->
+
+           <div class="row" style="margin-left: 100px;">
+               <div class="card mb-3 border-0 mt-5 " id="course" style="max-width: 540px;">
+                   <!--............................................ 
+                                      course-1
+                     ............................................-->
+                   <div class="row g-0 border">
+                       <div class="col-md-4">
+                           <img src="{% static 'images/course1.png'%}" class="img-fluid w-100 rounded-start" alt="...">
+                       </div>
+                       <div class="col-md-8 ">
+                           <div class="card-body">
+                               <h5 class="card-title">Learn UI/UX</h5>
+                               <p class="card-text">Learn UI/UX to design intuitive, user-friendly interfaces that enhance user experiences. Master tools, principles, and best practices to create impactful designs.</p>
+                               <a class="btn" href="#" role="button"></a>
+                           </div>
+                       </div>
+                   </div>
+                   <!--.................................................... 
+                                            course-2
+                     ....................................................-->
+                   <div class="row g-0 mt-3 border">
+                       <div class="col-md-4">
+                           <img src="{% static 'images/course2.png'%}" class="img-fluid w-100 rounded-start" alt="...">
+                       </div>
+                       <div class="col-md-8 ">
+                           <div class="card-body">
+                               <h5 class="card-title">Frontend Development using Angular</h5>
+                               <p class="card-text">Frontend Development with Angular equips you to build responsive, dynamic web applications, leveraging its powerful framework for seamless data handling and modular design.</p>
+                               <a class="btn " href="#" role="button"></a>
+                           </div>
+                       </div>
+                   </div>
+                   <!--.................................................. 
+                                           course-3
+                     ..................................................-->
+                   <div class="row g-0 mt-3 border">
+                       <div class="col-md-4">
+                           <img src="{% static 'images/course3.png'%}" class="img-fluid w-100 rounded-start" alt="...">
+                       </div>
+                       <div class="col-md-8 ">
+                           <div class="card-body">
+                               <h5 class="card-title">Backend Development using NodeJS</h5>
+                               <p class="card-text">Backend Development with Node.js uses JavaScript to build scalable, high-performance server-side applications with event-driven architecture.</p>
+                               <a class="btn " href="#" role="button"></a>
+                           </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-3 border-0 mt-5 col-md-12" style="max-width: 540px;">
+                    <!--............................................ 
+                                         course-4
+                      ............................................-->
+                    <div class="row g-0 border">
+                        <div class="col-md-4">
+                            <img src="{% static 'images/course4.jpg'%}" class="img-fluid w-100 rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8 ">
+                            <div class="card-body">
+                                <h5 class="card-title">Advanced Python</h5>
+                                <p class="card-text">Advanced Python covers decorators, generators, multithreading, and data structures, enabling mastery of Python's advanced features and best practices.</p>
+                                <a class="btn" href="#" role="button"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--............................................. 
+                                         course-5
+                      .............................................-->
+                    <div class="row g-0 mt-3 border">
+                        <div class="col-md-4">
+                            <img src="{% static 'images/course5.jpg'%}" class="img-fluid w-100 rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8 ">
+                            <div class="card-body">
+                                <h5 class="card-title">Frontend Development using ReactJS</h5>
+                                <p class="card-text">Frontend Development with React builds interactive interfaces. It enables efficient component-based design for scalable and responsive web applications.</p>
+                                <a class="btn " href="#" role="button"></a>
+                            </div>
+                        </div>
+                    </div>
+                    <!--............................................. 
+                                           course-6
+                      .............................................-->
+                    <div class="row g-0 mt-3 border">
+                        <div class="col-md-4">
+                            <img src="{% static 'images/course6.png'%}" class="img-fluid w-100 rounded-start" alt="...">
+                        </div>
+                        <div class="col-md-8 ">
+                            <div class="card-body">
+                                <h5 class="card-title">Backend Development using Django</h5>
+                                <p class="card-text">Backend Development with Django builds secure, scalable server-side applications using Python, offering efficient database management and user authentication.</p>
+                                <a class="btn " href="#" role="button"></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+           
+        </section>
+        <!--.............................................................. 
+                               Enroll section
+          ................................................................-->
+        <!-- style="max-width: 540px;" -->
+        <section class="container mt-5 ">
+            <div class="card mb-3 text-bg-custom p-5">
+                <div class="row g-0 ">
+
+                    <div class="col-lg-8">
+                        <div class="card-body">
+                            <h3 class="card-title fw-bold">Have Questions or Feedback?</h3>
+                            <p class="card-text text-light"> <small>We'd love to hear from you! If you have any questions or want to share your feedback, feel free to reach out to us. Your input helps us improve and serve you better.</small></p>
+
+                        </div>
+                    </div>
+                    <!--........................................................modal section
+                      ........................................................-->
+                    <div class="col-lg-4">
+                        <button class="btn btn-light text-custom mt-5 ms-5" data-bs-toggle="modal"
+                            data-bs-target="#exampleModal">Tell Us More</button>
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                            aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title text-custom" id="exampleModalLabel">Enter Information
+                                        </h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form>
+                                            <div class="mb-3">
+                                                <label for="recipient-email"
+                                                    class="col-form-label text-custom">Name:</label>
+                                                <input type="text" class="form-control" placeholder="Enter Your Name"
+                                                    id="recipient-email">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="recipient-email"
+                                                    class="col-form-label text-custom">Course Name:</label>
+                                                <input type="text" class="form-control" placeholder="Enter Your Course"
+                                                    id="recipient-email">
+                                            </div>
+                                            <div class="mb-3">
+                                                <label for="message-text" class="col-form-label text-custom">Feedback
+                                                  :</label>
+                                                <textarea class="form-control" placeholder="Enter Your Feedback"
+                                                    id="message-text"></textarea>
+                                            </div>
+                                            
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-danger"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button type="submit" class="btn btn-custom" data-bs-dismiss="modal">Submit
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!--........................................................... 
+                              Partners section
+          ..........................................................-->
+        <section class="container d-none d-lg-block .d-xl-block  ">
+            <h3 class="mb-4 text-center fw-bold">Our Valuable Partners Are</h3>
+            <div class="d-flex justify-content-between mb-5">
+                <img class="img-fluid sponsor-img" src="{% static 'images/company1.png'%}">
+                <img class="img-fluid sponsor-img" src="{% static 'images/company2.jpeg'%}">
+                <img class="img-fluid sponsor-img" src="{% static 'images/company3.jpeg'%}" >
+                <img class="img-fluid sponsor-img" src="{% static 'images/company4.jpg'%}" >
+                <img class="img-fluid sponsor-img" src="{% static 'images/company5.jpg'%}" >
+                <img class="img-fluid sponsor-img" src="{% static 'images/company6.png'%}">
+            </div>
+        </section>
+    </main>
+    <!-- Footer -->
+    <footer id="address">
+        <div class="company-name">Skill-Ed</div>
+        <div class="description">
+            Skill-Ed is an innovative e-learning platform designed to empower learners with high-quality, engaging, and
+            accessible educational resources.
+        </div>
+        <div class="address">Carnival Phase 1 Infopark, Kochi, India</div>
+        <div>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://www.facebook.com/"><i
+                    class="fa-brands fa-facebook"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://www.instagram.com/"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://twitter.com/?lang=en"><i
+                    class="fa-brands fa-twitter"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://www.whatsapp.com/"><i
+                    class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div class="copyright">&copy; 2025 Skill-Ed. All rights reserved.</div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

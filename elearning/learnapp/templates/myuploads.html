@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Uploads</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap" rel="stylesheet">
+    <!-- font awesome icons  -->
+    <script src="https://kit.fontawesome.com/187a4ab8ee.js" crossorigin="anonymous"></script>
+    <style>
+
+
+        .video-section, .file-section {
+            padding: 20px;
+            margin-top: 30px;
+            border-radius: 10px;
+        }
+        
+        .video-section {
+            background-color: #f8f9fa;
+            border: 2px solid #007bff;
+        }
+
+        .file-section {
+            background-color: #f1f3f5;
+            border: 2px solid #6c757d;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .card-body {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            color: #6c757d;
+        }
+
+        .delete-btn {
+            margin-top: 10px;
+        }
+
+        .download-btn {
+            margin-top: 10px;
+            display: block;
+        }
+
+        .file-thumbnail {
+            max-width: 100%;
+            height: auto;
+            margin-top: 10px;
+        }
+
+        .section-header {
+            font-size: 2rem;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #333;
+        }
+
+
+
+        body {
+    font-family: 'Poppins', sans-serif;
+    background-image: url("{% static 'images/bg-image.jpg' %}");
+}
+
+
+
+@media screen and (max-width:600px) {
+    h1 {
+        font-size: 14px;
+    }
+
+    p {
+        font-size: 10px;
+    }
+  
+}
+.collapse{
+    margin-left: 800px;
+}
+
+  .btn-custom ,.text-bg-custom{
+    background-color: #1f70b8;
+    color: white; /* Adjust text color for better contrast */
+    border: none; /* Optional: remove border */
+  }
+  .text-custom {
+    color: #1f70b8 ;
+  }
+
+  .btn-custom:hover {
+    background-color: #165a91; /* Optional: darker shade for hover effect */
+  }
+  footer {
+      background-color: #1f70b8;
+      color: white;
+      padding: 20px 0;
+      text-align: center;
+    }
+
+    footer .company-name {
+      font-size: 1.5rem;
+      font-weight: bold;
+    }
+
+    footer .address .description{
+      font-size: 1rem;
+      margin: 5px 0;
+    }
+
+    footer .copyright {
+      font-size: 0.9rem;
+      margin-top: 10px;
+    }
+       
+
+
+    </style>
+</head>
+<body>
+
+            <!--............................................... 
+                        navbar section
+          ................................................-->
+          <nav class="navbar navbar-expand-lg bg-light">
+            <div class="container">
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <img src="{% static 'images/logo.jpg' %}" alt="Skill-Ed Logo" style="width: 150px;height: 50px;">
+                <div class="collapse navbar-collapse" id="navbarTogglerDemo03" style="margin-left: 800px;">
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-auto">
+                        <li class="nav-item">
+                            <a class="nav-link"   onclick="window.close()" href="#">Home</a>
+                          </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#address">About</a>
+                        </li>
+                       
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Logout</a>
+                        </li>
+
+                        
+             
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+
+
+
+<div class="container">
+    <!-- Video Section -->
+    <div class="video-section">
+        <div class="section-header text-primary">Videos</div>
+        <div class="row">
+            {% for i, j, k, id in video_data %}
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        <video width="100%" controls>
+                            <source src="{{ k }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                        <h5 class="card-title">{{ i }}</h5>
+                        <p class="card-text">{{ j }}</p>
+                        <a href="/delete/{{ id }}" class="btn btn-danger delete-btn">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- File Section -->
+    <div class="file-section">
+        <div class="section-header text-secondary">Files</div>
+        <div class="row">
+            {% for i, j, k, thumbnail, id in file_data %}
+            <div class="col-4">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                        {% if k %}
+                            <a href="{{ k }}" class="btn btn-secondary download-btn" download>Download File</a>
+                        {% endif %}
+                        {% if thumbnail %}
+                            <img src="{{ thumbnail }}" alt="File Thumbnail" class="file-thumbnail">
+                        {% endif %}
+                        <h5 class="card-title">{{ i }}</h5>
+                        <p class="card-text">{{ j }}</p>
+                        <a href="/delete/{{ id }}" class="btn btn-danger delete-btn">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
+<!--............................................................... 
+                             footer section
+      ..............................................................-->
+
+      <footer id="address">
+        <div class="company-name">Skill-Ed</div>
+        <div class="description">Skill-Ed is an innovative e-learning platform designed to empower learners with high-quality, engaging, and accessible educational resources. </div>
+        <div class="address">Carnival Phase 1 Infopark , Kochi, India</div>
+        
+        <div>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://www.facebook.com/"><i
+                    class="fa-brands fa-facebook"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4 " href="https://www.instagram.com/"><i
+                    class="fa-brands fa-instagram"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://twitter.com/?lang=en"><i
+                    class="fa-brands fa-twitter"></i></a>
+            <a target="_blank" class="text-white fs-2 ps-4" href="https://www.whatsapp.com/"><i
+                    class="fa-brands fa-whatsapp"></i></a>
+        </div>
+        <div class="copyright">&copy; 2025 Skill-Ed. All rights reserved.</div>
+      </footer>
+    <!--.............................................. 
+                       js cdn link
+      ..............................................-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa"
+        crossorigin="anonymous"></script>
+
+</body>
+
+</html>
